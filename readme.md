@@ -50,8 +50,8 @@ abc999に参加する設定で、コンテストへの参加からサブミッ�
 
 ## ディレクトリ構成
 
-* `lib` 汎用的に利用するライブラリのコードをおきます。コードにgennyを利用した場合、そのままでは使えません。`make generate`を実行して実際に利用するコードを生成してください。
-* `templates` `make new`で生成する`main.go`のテンプレートを置きます。
+* `lib`: 汎用的に利用するライブラリのコードをおきます。コードにgennyを利用した場合、そのままでは使えません。`make generate`を実行して実際に利用するコードを生成してください。
+* `templates`: `make new`で生成する`main.go`のテンプレートを置きます。
 
 ## 複数ファイルによる実装
 atcoderでは複数ファイルから成るソースコードを提出することはできません。
@@ -68,17 +68,17 @@ func solve(N []int) int {
 `make test`や`make submit`を実行すると、提出用のコードとして以下のような`submit/submit.go`が生成されます。
 
 ```go
-func lib_MaxInt() {
+func lib_MaxInt(values ...int) {
     ...
 }
 
 func solve(N []int) int {
-    return lib.MaxInt(N...)
+    return lib_MaxInt(N...)
 }
 ```
 
 ## ライブラリ実装について
-記述量を減らし、効率的にライブラリを実装できるようにgennyとmustifyという2つのコード自動生成ツールを利用しています。
+記述量を減らし、効率的にライブラリを実装できるように[genny](https://github.com/cheekybits/genny)と[mustify](https://github.com/mpppk/mustify)という2つのコード自動生成ツールを利用しています。
 * (TODO) gennyについて
 * (TODO) mustifyについて
 
