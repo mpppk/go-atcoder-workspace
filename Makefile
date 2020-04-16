@@ -1,7 +1,4 @@
 AAAnumber := AAA=int,int8,int16,int32,int64,float32,float64
-AAAint := AAA=int,int8,int16,int32,int64
-BBBnumber := BBB=int,int8,int16,int32,int64,float32,float64
-YYY := YYY=rune,string,int,int8,int16,int32,int64,float32,float64
 ZZZ := ZZZ=rune,string,int,int8,int16,int32,int64,float32,float64
 SUBMIT_DIR := submit
 SUBMIT_FILE := submit.go
@@ -75,9 +72,4 @@ mustify: genny
 genny:
 	$(MAKE) clean pkg=lib
 	genny -in='./lib/number.go' -out='./lib/gen-number.go' gen "$(AAAnumber)"
-	genny -in='./lib/number2.go' -out='./lib/gen-number2.go' gen "$(AAAnumber) $(BBBnumber)"
-	genny -in='./lib/int.go' -out='./lib/gen-int.go' gen "$(AAAint)"
 	genny -in='./lib/type.go' -out='./lib/gen-type.go' gen "$(ZZZ)"
-	genny -in='./lib/type2.go' -out='./lib/gen-type2.go' gen "$(YYY) $(ZZZ)"
-	genny -in='./lib/misc.go' -out='./lib/gen-misc.go' gen "$(AAAnumber)"
-	genny -in='./lib/input-number.go' -out='./lib/gen-input-number.go' gen "$(AAAnumber)"
