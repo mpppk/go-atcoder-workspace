@@ -1,11 +1,13 @@
 package lib
 
+// CopyZZZ は与えられたsliceをコピーして返します。
 func CopyZZZ(values []ZZZ) []ZZZ {
 	dst := make([]ZZZ, len(values))
 	copy(dst, values)
 	return dst
 }
 
+// ReverseZZZ は与えられたsliceの順序を逆転させたsliceを返します。(非破壊)
 func ReverseZZZ(values []ZZZ) []ZZZ {
 	newValues := CopyZZZ(values)
 	for i, j := 0, len(values)-1; i < j; i, j = i+1, j-1 {
@@ -14,17 +16,24 @@ func ReverseZZZ(values []ZZZ) []ZZZ {
 	return newValues
 }
 
-type Func2ZZZ func(v1, v2 ZZZ) ZZZ
+type FuncZZZ func(values ...ZZZ) ZZZ
 
-type CounterZZZ struct {
-	M     map[ZZZ]int64
-	Func2 Func2ZZZ
+// ZZZCounter は値ごとの出現頻度をカウントするための構造体です。
+type ZZZCounter struct {
+	M    map[ZZZ]int64
+	Func FuncZZZ
 }
 
-func NewCounterZZZ() *CounterZZZ {
-	return &CounterZZZ{M: map[ZZZ]int64{}}
+func NewCounterZZZ() *ZZZCounter {
+	return &ZZZCounter{M: map[ZZZ]int64{}}
 }
 
-func (c CounterZZZ) CountBy2ZZZ(i, j ZZZ) {
-	c.M[c.Func2(i, j)]++
+// Increment は与えられたキーのカウントを増やします。
+func (c ZZZCounter) Increment(value ZZZ) {
+	c.M[value]++
+}
+
+// IncrementBy 与えられた値から、事前に設定された関数によって計算されたキーのカウントを増やします。
+func (c ZZZCounter) IncrementBy(values ...ZZZ) {
+	c.M[c.Func(values...)]++
 }
